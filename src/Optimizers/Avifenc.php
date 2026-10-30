@@ -26,7 +26,9 @@ class Avifenc extends BaseOptimizer
 
     protected function getDecodeCommand()
     {
-        $this->tmpPath = tempnam(sys_get_temp_dir(), 'avifdec').'.png';
+        $tmpBase = tempnam(sys_get_temp_dir(), 'avifdec');
+        @unlink($tmpBase);
+        $this->tmpPath = $tmpBase.'.png';
 
         $optionString = implode(' ', [
             '-j all',
